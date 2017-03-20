@@ -240,20 +240,13 @@ link_remote(zathura_t* zathura, const char* file)
     return;
   }
 
-  const char* path = zathura_document_get_path(zathura->document);
-  char* dir        = g_path_get_dirname(path);
-  char* uri        = g_build_filename(dir, file, NULL);
-
   char* argv[] = {
     *(zathura->global.arguments),
-    uri,
+    file,
     NULL
   };
 
   g_spawn_async(NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
-
-  g_free(uri);
-  g_free(dir);
 }
 
 static void
